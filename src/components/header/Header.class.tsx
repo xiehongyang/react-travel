@@ -1,44 +1,66 @@
 import React from "react";
 import styles from "./Header.module.css";
 import logo from "../../assets/logo.svg";
-import { Layout, Typography, Input, Menu, Button, Dropdown } from "antd";
-import { GlobalOutlined } from "@ant-design/icons";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
-import { useSelector } from '../../redux/hooks';
-import {addLanguageActionCreator, changeLanguageActionCreator, LanguageActionTypes} from "../../redux/language/languageActions";
-import {useTranslation} from "react-i18next";
-import {useDispatch} from "react-redux";
-import {Dispatch} from "redux";
+import {Layout, Typography, Input, Menu, Button, Dropdown} from "antd";
+import {GlobalOutlined} from "@ant-design/icons";
+import {RouteComponentProps, withRouter} from "../../helpers/withRouter";
+import store from "../../redux/store";
+import {LanguageState} from "../../redux/language/languageReducer";
+import {WithTranslation, withTranslation} from "react-i18next";
+import {addLanguageActionCreator, changeLanguageActionCreator} from "../../redux/language/languageActions";
+import {connect} from "react-redux";
 
-export const Header: React.FC = () => {
-    const navigate = useNavigate();
-    const { t } = useTranslation();
-    const location = useLocation();
-    const params = useParams();
-    const language = useSelector((state) => state.language);
-    const languageList = useSelector((state) => state.languageList);
-    const dispatch = useDispatch<Dispatch<LanguageActionTypes>>();
-    const menuClickHandler = (e) => {
+interface State extends LanguageState {}
+
+const mapStateToProps = (state) => {
+    return {
+        language: state.language,
+        languageList: state.languageList
+    }
+}
+
+
+class HeaderComponent extends React.Component<RouteComponentProps & WithTranslation, State> {
+
+    constructor(props) {
+        super(props);
+        const storeState = store.getState();
+        this.state = {
+            language: storeState.language,
+            languageList: storeState.languageList
+        }
+        store.subscribe(this.handleStoreChange)
+    }
+
+    handleStoreChange = () => {
+        const storeState = store.getState();
+        this.setState({
+            language: storeState.language,
+            languageList: storeState.languageList
+        });
+    }
+    menuClickHandler = (e) => {
         if (e.key === 'new') {
-            dispatch(addLanguageActionCreator('新语言', 'new_lang'));
+            store.dispatch(addLanguageActionCreator('新语言', 'new_lang'));
         } else {
-            dispatch(changeLanguageActionCreator(e.key));
+            store.dispatch(changeLanguageActionCreator(e.key));
         }
 
     }
-    return (
-        <div className={styles["app-header"]}>
+    render() {
+        const { navigate, t } = this.props;
+        return (<div className={styles["app-header"]}>
             {/* top-header */}
             <div className={styles["top-header"]}>
                 <div className={styles.inner}>
-                    <Typography.Text style={{width: 120}}>让旅游更幸福</Typography.Text>
+                    <Typography.Text className={styles['App-slogan']}>{t('header.slogan')}</Typography.Text>
                     <Dropdown.Button
                         style={{marginLeft: 15}}
                         overlay={
-                            <Menu onClick={menuClickHandler}
-                                  items={languageList.map((l) => {
-                                      return {key: l.code, label: l.name}
-                                  })}>
+                            <Menu onClick={this.menuClickHandler}
+                                items={this.state.languageList.map((l) => {
+                                    return {key: l.code, label: l.name}
+                                })}>
                                 <Menu.Item key={"new"}>
                                     {t("header.add_new_language")}
                                 </Menu.Item>
@@ -46,7 +68,7 @@ export const Header: React.FC = () => {
                         }
                         icon={<GlobalOutlined/>}
                     >
-                        {language === 'zh' ? '中文': 'English'}
+                        {this.state.language === 'zh' ? '中文': 'English'}
                     </Dropdown.Button>
                     <Button.Group className={styles["button-group"]}>
                         <Button onClick={() => navigate('/register')}>{t('header.register')}</Button>
@@ -88,6 +110,8 @@ export const Header: React.FC = () => {
                     { key: "16", label: t("header.insurance") },
                 ]}
             />
-        </div>
-    );
-};
+        </div>)
+    }
+}
+
+export const Header= connect()(withTranslation()(withRouter(HeaderComponent)))
