@@ -15,8 +15,8 @@ export const Header: React.FC = () => {
     const { t } = useTranslation();
     const location = useLocation();
     const params = useParams();
-    const language = useSelector((state) => state.language);
-    const languageList = useSelector((state) => state.languageList);
+    const language = useSelector((state) => state.language.language);
+    const languageList = useSelector((state) => state.language?.languageList);
     const dispatch = useDispatch<Dispatch<LanguageActionTypes>>();
     const menuClickHandler = (e) => {
         if (e.key === 'new') {
@@ -24,8 +24,8 @@ export const Header: React.FC = () => {
         } else {
             dispatch(changeLanguageActionCreator(e.key));
         }
-
     }
+
     return (
         <div className={styles["app-header"]}>
             {/* top-header */}
