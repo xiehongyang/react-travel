@@ -3,3 +3,7 @@ export * from './footer';
 export * from './sideMenu';
 export * from './carousel';
 export * from './productCollection';
+export * from './productIntro';
+export * from './productComments';
+export * from './filter';
+export * from './productList';
