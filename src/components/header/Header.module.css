@@ -76,3 +76,7 @@
     background-color: #1976D2 !important;
     color: #f5f5f5 !important;
 }
+
+.no-wrap {
+    text-wrap: nowrap;
+}
