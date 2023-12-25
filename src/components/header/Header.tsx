@@ -23,6 +23,9 @@ export const Header: React.FC = () => {
     const language = useSelector((state) => state.language.language);
     const languageList = useSelector((state) => state.language?.languageList);
     const jwt = useSelector(s => s.user.token);
+    const shoppingCartItems = useSelector(s => s.shoppingCart.items);
+    const shoppingCartLoading = useSelector(s => s.shoppingCart.loading);
+
     const [username, setUsername] = useState('');
     const dispatch = useDispatch();
     const menuClickHandler = (e) => {
@@ -72,7 +75,11 @@ export const Header: React.FC = () => {
                                 <span className={styles['no-wrap']} style={{marginRight: 20}}>{t('header.welcome')}
                                     <Typography.Text strong>{username}</Typography.Text>
                                 </span>
-                                <Button>{t("header.shoppingCart")}</Button>
+                                <Button loading={shoppingCartLoading}
+                                        onClick={() => navigate('/shoppingCart')}>
+                                    {t("header.shoppingCart")}
+                                    ({shoppingCartItems.length})
+                                </Button>
                                 <Button onClick={onLogout}>{t("header.signOut")}</Button>
                             </Button.Group> :
                             <Button.Group className={styles["button-group"]}>
