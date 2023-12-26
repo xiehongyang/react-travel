@@ -50,7 +50,7 @@ export const giveMeDataActionCreator =
         dispatch(fetchRecommendProductStartActionCreator());
         try {
             const {data} = await axios.get(
-                "http://82.157.43.234:8080/api/productCollections"
+                "productCollections"
             );
             dispatch(fetchRecommendProductSuccessActionCreator(data));
         } catch (error) {

@@ -19,7 +19,7 @@ export const placeOrder = createAsyncThunk(
     'order/placeOrder',
     async (parameters: { jwt: string, orderId: string }, thunkAPI) => {
         const {data} = await axios.post(
-            `http://82.157.43.234:8080/api/orders/${parameters.orderId}/placeOrder`,
+            `orders/${parameters.orderId}/placeOrder`,
             null, {
                 headers: {
                     Authorization: `bearer ${parameters.jwt}`

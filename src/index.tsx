@@ -9,6 +9,7 @@ import rootStore from './redux/store';
 import axios from "axios";
 import {PersistGate} from "redux-persist/integration/react";
 
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL as string;
 axios.defaults.headers['x-icode'] = process.env.REACT_APP_X_ICODE as string;
 
 const root = ReactDOM.createRoot(
