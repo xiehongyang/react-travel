@@ -10,6 +10,7 @@ import {useTranslation} from "react-i18next";
 import {useDispatch} from "react-redux";
 import jwt_decode, {JwtPayload as DefaultJwtPayload} from 'jwt-decode';
 import {userSlice} from "../../redux/user/slice";
+import rootStore from '../../redux/store';
 
 interface JwtPayload extends DefaultJwtPayload {
     username: string;
@@ -38,6 +39,7 @@ export const Header: React.FC = () => {
 
     const onLogout = () => {
         dispatch(userSlice.actions.logOut());
+        rootStore.persistor.purge();
         navigate('/');
     }
 
@@ -53,7 +55,7 @@ export const Header: React.FC = () => {
             {/* top-header */}
             <div className={styles["top-header"]}>
                 <div className={styles.inner}>
-                    <Typography.Text className={styles['no-wrap']} style={{width: 120}}>让旅游更幸福</Typography.Text>
+                    <Typography.Text className={styles['no-wrap']} style={{width: 120}}>{t('header.slogan')}</Typography.Text>
                     <Dropdown.Button
                         style={{marginLeft: 15}}
                         overlay={
@@ -97,7 +99,7 @@ export const Header: React.FC = () => {
                     </Typography.Title>
                 </span>
                 <Input.Search
-                    placeholder={"请输入旅游目的地、主题、或关键字"}
+                    placeholder={t('header.searchPlaceholder')}
                     className={styles["search-input"]}
                     onSearch={(keyword) => navigate('/search/' + keyword)}
                 />

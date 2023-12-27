@@ -1,20 +1,32 @@
 import React from "react";
 import styles from "./UserLayout.module.css";
 import logo from "../../assets/logo.svg";
-import { Link } from "react-router-dom";
-import { CaretDownOutlined } from "@ant-design/icons";
-import { Layout, Menu, Dropdown, Button } from "antd";
-const { Header, Footer, Content } = Layout;
+import {Link} from "react-router-dom";
+import {CaretDownOutlined} from "@ant-design/icons";
+import {Layout, Menu, Dropdown, Button} from "antd";
+import {useTranslation} from "react-i18next";
+import {addLanguageActionCreator, changeLanguageActionCreator} from "../../redux/language/languageActions";
+import {useDispatch} from "react-redux";
+import {useSelector} from "../../redux/hooks";
+
+const {Header, Footer, Content} = Layout;
 
 interface PropsTypes {
     children: React.ReactNode;
 }
 
 export const UserLayout: React.FC<PropsTypes> = (props) => {
+    const {t} = useTranslation();
+    const dispatch = useDispatch();
+    const languageList = useSelector((state) => state.language?.languageList);
+    const menuClickHandler = (e) => {
+        dispatch(changeLanguageActionCreator(e.key) as any);
+    }
     const menu = (
-        <Menu>
-            <Menu.Item>中文</Menu.Item>
-            <Menu.Item>English</Menu.Item>
+        <Menu onClick={menuClickHandler}
+              items={languageList.map((l) => {
+                  return {key: l.code, label: l.name}
+              })}>
         </Menu>
     );
 
@@ -25,7 +37,7 @@ export const UserLayout: React.FC<PropsTypes> = (props) => {
                     <Dropdown overlay={menu}>
                         <Button>
                             {" "}
-                            选择语言 <CaretDownOutlined />
+                            {t('signIn.chooseLanguage')} <CaretDownOutlined/>
                         </Button>
                     </Dropdown>
                 </div>
@@ -34,17 +46,16 @@ export const UserLayout: React.FC<PropsTypes> = (props) => {
                 <div className={styles["top"]}>
                     <div className={styles["content-header"]}>
                         <Link to="/">
-                            <img alt="logo" className={styles["logo"]} src={logo} />
-                            <span className={styles["title"]}>React 旅游网</span>
+                            <img alt="logo" className={styles["logo"]} src={logo}/>
+                            <span className={styles["title"]}>{t('title')}</span>
                         </Link>
                     </div>
                     <div className={styles["desc"]}>
-                        慕课网 是我朝最具影响力的 线上课程学习网站
                     </div>
                     {props.children}
                 </div>
             </Content>
-            <Footer style={{ textAlign: "center" }}>Footer就不写了，太累了</Footer>
+            <Footer style={{textAlign: "center"}}></Footer>
         </Layout>
     );
 };

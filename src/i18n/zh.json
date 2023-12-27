@@ -1,10 +1,24 @@
 {
+  "title": "React 旅游网",
+  "signIn": {
+    "chooseLanguage": "选择语言",
+    "submit": "提交",
+    "username": "用户名",
+    "password": "密码"
+  },
+  "register": {
+    "confirmPassword": "再次输入密码",
+    "passwordEquality": "密码确认不一致！",
+    "registerSuccess": "注册成功! 请登录",
+    "registerFail": "注册失败，请稍后再试"
+  },
   "header": {
+    "searchPlaceholder": "请输入旅游目的地、主题、或关键字",
     "slogan": "让旅行更幸福",
     "add_new_language": "添加新语言",
     "title": "React 旅游网",
-    "register":"注册",
-    "signin":"登陆",
+    "register": "注册",
+    "signin": "登陆",
     "home_page": "旅游首页",
     "weekend": "周末游",
     "group": "跟团游",
@@ -16,17 +30,17 @@
     "theme": "主题游",
     "custom": "定制游",
     "study": "游学",
-    "visa":"签证",
-    "enterprise":"企业游",
-    "high_end":"高端游",
-    "outdoor":"爱玩户外",
-    "insurance":"保险",
+    "visa": "签证",
+    "enterprise": "企业游",
+    "high_end": "高端游",
+    "outdoor": "爱玩户外",
+    "insurance": "保险",
     "shoppingCart": "购物车",
     "signOut": "注销",
     "welcome": "欢迎回来 "
   },
   "footer": {
-    "detail" : "版权所有 @ React 旅游网"
+    "detail": "版权所有 @ React 旅游网"
   },
   "home_page": {
     "hot_recommended": "爆款推荐",
@@ -34,5 +48,26 @@
     "domestic_travel": "国内游推荐",
     "joint_venture": "合作企业",
     "start_from": "(起)"
+  },
+  "detailPage": {
+    "addToShoppingCart": "放入购物车",
+    "productFeature": "产品特色",
+    "cost": "费用",
+    "bookingGuidelines": "预订须知",
+    "userComment": "用户评价"
+  },
+  "shoppingCart": {
+    "originalPrice": "原价",
+    "currentPrice": "现价",
+    "pay": "下单支付",
+    "clear": "清空",
+    "total": "总计"
+  },
+  "placeOrder": {
+    "creditCard": "信用卡",
+    "backToHomepage": "回到首页",
+    "pay": "支付",
+    "paySuccess": "支付成功",
+    "total": "总计"
   }
 }

@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# React Travel E-commerce Platform Deployed on AWS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Visit Site](https://img.shields.io/badge/Visit%20Site-Click%20to%20Visit-blue)](https://master.dmrzjhpx3oc6s.amplifyapp.com/)
 
-## Available Scripts
+This project represents a comprehensive travel e-commerce platform deployed entirely on AWS. It offers a range of functionalities including user authentication (login/register), language switching, search, detailed product pages, cart management, ordering, and payment features.
 
-In the project directory, you can run:
+## Key Features
 
-### `npm start`
+- **Authentication:** Users can register new accounts or log in with existing ones.
+- **Language Switching:** Multi-language support enabling users to switch between languages.
+- **Search:** Allows users to find travel products or destinations easily.
+- **Product Details:** Comprehensive information available on individual product pages.
+- **Shopping cart Management:** Users can manage their interested products by adding them to a cart.
+- **Ordering & Payment:** Seamless flow for users to place orders and complete payments.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Development Highlights
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The development process for this project encompassed a wide array of React development skills and techniques, including but not limited to:
 
-### `npm test`
+- Setting up the runtime environment using `create-react-app` with TypeScript.
+- Implementing global state management with `redux`.
+- Managing public and private routes using `react-router`.
+- Employing `Ant Design 4` for structured, component-based pages.
+- Ensuring state persistence with `redux-persist`.
+- Internationalization support using the `i18n` library for multi-language capabilities.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Run
 
-### `npm run build`
+1. Clone the project repository to your local environment.
+2. Run `npm install` to install necessary dependencies.
+3. Run `npm start` to launch the project.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Demo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Explore the project by visiting the [deployment link](https://master.dmrzjhpx3oc6s.amplifyapp.com/).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contributions
 
-### `npm run eject`
+Contributions to the project are welcome. Feel free to raise issues or submit PRs for improvements.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## License
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under [License Type]. For more details, refer to the LICENSE file.

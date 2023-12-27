@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {Action, createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import axios from "axios";
 
 
@@ -46,9 +46,9 @@ export const userSlice = createSlice({
             state.loading = false;
             state.token = action.payload;
             state.error = null;
-        }).addCase(signIn.rejected.type, (state, action: PayloadAction<string | null>) => {
+        }).addCase(signIn.rejected.type, (state, action: PayloadAction<string> & ErrorResponse) => {
             state.loading = false;
-            state.error = action.payload;
+            state.error = action.error.message;
         })
     }
-})
+});

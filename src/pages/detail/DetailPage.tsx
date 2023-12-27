@@ -11,6 +11,7 @@ import {useAppDispatch, useSelector} from "../../redux/hooks";
 import {MainLayout} from "../../layouts/mainLayout";
 import {ShoppingCartOutlined} from "@ant-design/icons";
 import {addShoppingCartItem} from "../../redux/shoppingCart/slice";
+import {useTranslation} from "react-i18next";
 
 const {RangePicker} = DatePicker;
 
@@ -24,7 +25,7 @@ export const DetailPage: React.FC = () => {
     const loading = useSelector(state => state.productDetail.loading);
     const error = useSelector(state => state.productDetail.error);
     const product = useSelector(state => state.productDetail.data);
-
+    const {t} = useTranslation();
     const dispatch = useAppDispatch();
 
     const jwt = useSelector(s => s.user.token) as string;
@@ -73,7 +74,7 @@ export const DetailPage: React.FC = () => {
                             }}
                     >
                         <ShoppingCartOutlined />
-                        放入购物车
+                        {t('detailPage.addToShoppingCart')}
                     </Button>
                     <RangePicker open style={{marginTop: 20}}/>
                 </Col>
@@ -82,40 +83,40 @@ export const DetailPage: React.FC = () => {
         <Anchor className={styles['product-intro-anchor']}>
             <Menu mode="horizontal">
                 <Menu.Item key="1">
-                    <Anchor.Link href={"#feature"} title={"产品特色"}></Anchor.Link>
+                    <Anchor.Link href={"#feature"} title={t('detailPage.productFeature')}></Anchor.Link>
                 </Menu.Item>
                 <Menu.Item key="3">
-                    <Anchor.Link href={"#fees"} title={"费用"}></Anchor.Link>
+                    <Anchor.Link href={"#fees"} title={t('detailPage.cost')}></Anchor.Link>
                 </Menu.Item>
                 <Menu.Item key="4">
-                    <Anchor.Link href={"#notes"} title={"预订须知"}></Anchor.Link>
+                    <Anchor.Link href={"#notes"} title={t('detailPage.bookingGuidelines')}></Anchor.Link>
                 </Menu.Item>
                 <Menu.Item key="5">
-                    <Anchor.Link href={"#comments"} title={"用户评价"}></Anchor.Link>
+                    <Anchor.Link href={"#comments"} title={t('detailPage.userComment')}></Anchor.Link>
                 </Menu.Item>
             </Menu>
         </Anchor>
         <div id='feature' className={styles['product-detail-container']}>
             <Divider orientation={"center"}>
-                <Typography.Title level={3}>产品特色</Typography.Title>
+                <Typography.Title level={3}>{t('detailPage.productFeature')}</Typography.Title>
             </Divider>
             <div dangerouslySetInnerHTML={{__html: product.features}} style={{margin: 50}}></div>
         </div>
         <div id='fees' className={styles['product-detail-container']}>
             <Divider orientation={"center"}>
-                <Typography.Title level={3}>费用</Typography.Title>
+                <Typography.Title level={3}>{t('detailPage.cost')}</Typography.Title>
             </Divider>
             <div dangerouslySetInnerHTML={{__html: product.fees}} style={{margin: 50}}></div>
         </div>
         <div id='notes' className={styles['product-detail-container']}>
             <Divider orientation={"center"}>
-                <Typography.Title level={3}>预订须知</Typography.Title>
+                <Typography.Title level={3}>{t('detailPage.bookingGuidelines')}</Typography.Title>
             </Divider>
             <div dangerouslySetInnerHTML={{__html: product.notes}} style={{margin: 50}}></div>
         </div>
         <div id='comments' className={styles['product-detail-container']}>
             <Divider orientation={"center"}>
-                <Typography.Title level={3}>用户评价</Typography.Title>
+                <Typography.Title level={3}>{t('detailPage.userComment')}</Typography.Title>
             </Divider>
             <div style={{margin: 40}}>
                 <ProductComments data={commentMockData}></ProductComments>

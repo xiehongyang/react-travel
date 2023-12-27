@@ -1,18 +1,21 @@
-import { Form, Input, Button, Checkbox } from "antd";
+import {Form, Input, Button, Checkbox, message} from "antd";
 import styles from "./RegisterForm.module.css";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: {span: 8},
+    wrapperCol: {span: 16},
 };
 const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
+    wrapperCol: {offset: 8, span: 16},
 };
 
 export const RegisterForm = () => {
     const navigate = useNavigate();
+    const {t} = useTranslation();
+    const [messageApi, contextHolder] = message.useMessage();
     const onFinish = async (values: any) => {
         console.log("Success:", values);
         try {
@@ -21,9 +24,16 @@ export const RegisterForm = () => {
                 password: values.password,
                 confirmPassword: values.confirm,
             });
-            navigate("/signIn/");
+            messageApi.open({
+                type: 'success',
+                content: t('register.registerSuccess'),
+            });
+            setTimeout(() => navigate("/signIn/"), 1000);
         } catch (error) {
-            alert("注册失败！");
+            messageApi.open({
+                type: 'error',
+                content: t('register.registerFail'),
+            });
         }
     };
 
@@ -32,58 +42,60 @@ export const RegisterForm = () => {
     };
 
     return (
-        <Form
-            {...layout}
-            name="basic"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            className={styles["register-form"]}
-        >
-            <Form.Item
-                label="Username"
-                name="username"
-                rules={[{ required: true, message: "Please input your username!" }]}
+        <>{contextHolder}
+            <Form
+                {...layout}
+                name="basic"
+                initialValues={{remember: true}}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                className={styles["register-form"]}
             >
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    label={t('signIn.username')}
+                    name="username"
+                    rules={[{required: true, message: "Please input your username!"}]}
+                >
+                    <Input/>
+                </Form.Item>
 
-            <Form.Item
-                label="Password"
-                name="password"
-                rules={[{ required: true, message: "Please input your password!" }]}
-            >
-                <Input.Password />
-            </Form.Item>
+                <Form.Item
+                    label={t('signIn.password')}
+                    name="password"
+                    rules={[{required: true, message: "Please input your password!"}]}
+                >
+                    <Input.Password/>
+                </Form.Item>
 
-            <Form.Item
-                label="Confirm Password"
-                name="confirm"
-                hasFeedback
-                rules={[
-                    { required: true, message: "Please input your confirm password!" },
-                    ({ getFieldValue }) => ({
-                        validator(_, value) {
-                            if (!value || getFieldValue("password") === value) {
-                                return Promise.resolve();
-                            }
-                            return Promise.reject("密码确认不一致！");
-                        },
-                    }),
-                ]}
-            >
-                <Input.Password />
-            </Form.Item>
+                <Form.Item
+                    label={t('register.confirmPassword')}
+                    name="confirm"
+                    hasFeedback
+                    rules={[
+                        {required: true, message: "Please input your confirm password!"},
+                        ({getFieldValue}) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue("password") === value) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(t('register.passwordEquality'));
+                            },
+                        }),
+                    ]}
+                >
+                    <Input.Password/>
+                </Form.Item>
 
-            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                <Checkbox>Remember me</Checkbox>
-            </Form.Item>
+                <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                    <Checkbox>Remember me</Checkbox>
+                </Form.Item>
 
-            <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-            </Form.Item>
-        </Form>
+                <Form.Item {...tailLayout}>
+                    <Button type="primary" htmlType="submit">
+                        {t('signIn.submit')}
+                    </Button>
+                </Form.Item>
+            </Form>
+        </>
     );
 };

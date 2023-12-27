@@ -12,6 +12,7 @@ import {
 } from "antd";
 import {DeleteOutlined, CheckCircleOutlined} from "@ant-design/icons";
 import {ColumnsType} from "antd/es/table";
+import {useTranslation} from "react-i18next";
 
 const {Meta} = Card;
 const {Title, Text} = Typography;
@@ -50,15 +51,16 @@ export const PaymentCard: React.FC<PropsType> = ({
                                                      onShoppingCartClear,
                                                      onCheckout,
                                                  }) => {
+    const {t} = useTranslation();
     const paymentData: Item[] = [
         {
             key: 1,
-            item: "原价",
+            item: t("shoppingCart.originalPrice"),
             amount: <Text delete>¥ {originalPrice}</Text>,
         },
         {
             key: 3,
-            item: "现价",
+            item: t("shoppingCart.currentPrice"),
             amount: (
                 <Title type="danger" level={2}>
                     ¥ {price}
@@ -73,17 +75,17 @@ export const PaymentCard: React.FC<PropsType> = ({
             actions={[
                 <Button type="primary" danger onClick={onCheckout} loading={loading}>
                     <CheckCircleOutlined/>
-                    下单支付
+                    {t('shoppingCart.pay')}
                 </Button>,
                 <Button onClick={onShoppingCartClear} loading={loading}>
                     <DeleteOutlined/>
-                    清空
+                    {t('shoppingCart.clear')}
                 </Button>,
             ]}
         >
             <Skeleton loading={loading} active>
                 <Meta
-                    title={<Title level={2}>总计</Title>}
+                    title={<Title level={2}>{t('shoppingCart.total')}</Title>}
                     description={
                         <Table<Item>
                             columns={columns}

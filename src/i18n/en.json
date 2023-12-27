@@ -1,5 +1,19 @@
 {
+  "title": "React Travel",
+  "signIn": {
+    "chooseLanguage": "Choose Language",
+    "submit": "submit",
+    "username": "Username",
+    "password": "Password"
+  },
+  "register": {
+    "confirmPassword": "Confirm Password",
+    "passwordEquality": "The password confirmation does not match!",
+    "registerSuccess": "Registration successful! Please log in",
+    "registerFail": "Registration failed. Please try again later."
+  },
   "header": {
+    "searchPlaceholder": "Please enter a travel destination, theme, or keyword",
     "slogan": "Make travel happier",
     "add_new_language": "add new language",
     "title": "React Travel",
@@ -34,5 +48,26 @@
     "domestic_travel": "Domestic travel",
     "joint_venture": "Joint Venture",
     "start_from": "(start from)"
+  },
+  "detailPage": {
+    "addToShoppingCart": "Add to ShoppingCart",
+    "productFeature": "Product Features",
+    "cost": "Cost",
+    "bookingGuidelines": "Booking Guidelines",
+    "userComment": "User Comment"
+  },
+  "shoppingCart": {
+    "originalPrice": "Original Price",
+    "currentPrice": "Current Price",
+    "pay": "Place Order",
+    "clear": "Clear",
+    "total": "Total"
+  },
+  "placeOrder": {
+    "creditCard": "Credit Card",
+    "backToHomepage": "Back To Homepage",
+    "pay": "Pay",
+    "paySuccess": "Payment successful",
+    "total": "Total"
   }
 }

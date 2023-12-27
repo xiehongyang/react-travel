@@ -53,11 +53,11 @@ const IconText = ({icon, text}) => (
 );
 
 export const ProductList: React.FC<PropsType> = ({
-                                                     data,
+                                                     data = [],
                                                      paging,
                                                      onPageChange,
                                                  }) => {
-    const products = listData(data);
+    const products = listData(data ?? []);
     return (
         <List
             itemLayout="vertical"

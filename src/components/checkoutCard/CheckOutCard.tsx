@@ -1,11 +1,12 @@
 import React from "react";
-import { Skeleton, Card, Button, Typography, Table } from "antd";
-import { CheckCircleOutlined, HomeOutlined } from "@ant-design/icons";
-import { ColumnsType } from "antd/es/table";
-import { useNavigate } from "react-router-dom";
+import {Skeleton, Card, Button, Typography, Table} from "antd";
+import {CheckCircleOutlined, HomeOutlined} from "@ant-design/icons";
+import {ColumnsType} from "antd/es/table";
+import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
-const { Meta } = Card;
-const { Title, Text } = Typography;
+const {Meta} = Card;
+const {Title, Text} = Typography;
 
 interface OrderItem {
     key: number;
@@ -38,6 +39,7 @@ export const CheckOutCard: React.FC<PropsType> = ({
                                                       onCheckout,
                                                   }) => {
     const navigate = useNavigate();
+    const {t} = useTranslation();
 
     const paymentData: OrderItem[] = order
         ? order.orderItems.map((i, index) => ({
@@ -56,7 +58,7 @@ export const CheckOutCard: React.FC<PropsType> = ({
 
     return (
         <Card
-            style={{ width: 600, marginTop: 50 }}
+            style={{width: 600, marginTop: 50}}
             actions={[
                 order && order.state === "Completed" ? (
                     <Button
@@ -66,13 +68,13 @@ export const CheckOutCard: React.FC<PropsType> = ({
                         }}
                         loading={loading}
                     >
-                        <HomeOutlined />
-                        回到首页
+                        <HomeOutlined/>
+                        {t('placeOrder.backToHomepage')}
                     </Button>
                 ) : (
                     <Button type="primary" danger onClick={onCheckout} loading={loading}>
-                        <CheckCircleOutlined />
-                        支付
+                        <CheckCircleOutlined/>
+                        {t('placeOrder.pay')}
                     </Button>
                 ),
             ]}
@@ -81,7 +83,8 @@ export const CheckOutCard: React.FC<PropsType> = ({
                 <Meta
                     title={
                         <Title level={2}>
-                            {order && order.state === "Completed" ? "支付成功" : "总计"}
+                            {order && order.state === "Completed" ? t('placeOrder.paySuccess')
+                                : t('placeOrder.total')}
                         </Title>
                     }
                     description={
