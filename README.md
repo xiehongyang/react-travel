@@ -40,4 +40,4 @@ Contributions to the project are welcome. Feel free to raise issues or submit PR
 
 ## License
 
-This project is licensed under [License Type]. For more details, refer to the LICENSE file.
+This project is licensed under MIT. For more details, refer to the LICENSE file.
